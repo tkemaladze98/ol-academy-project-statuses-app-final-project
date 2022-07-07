@@ -6,11 +6,7 @@ a{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
-th{
-  border: 1px solid black;
-}
-table{
-  border-collapse: collapse;
-  background-color: burlywood;
+  main{
+    padding: 30px 15px;
+  }
 }

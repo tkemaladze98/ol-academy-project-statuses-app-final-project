@@ -1,0 +1,33 @@
+.generated-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  table {
+    border-collapse: collapse;
+    background-color: burlywood;
+    th {
+      border: 1px solid black;
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    button {
+      min-height: 40px;
+      width: 100%;
+      max-width: 300px;
+      font-size: 20px;
+      background-color: #0c3b5f;
+      border: none;
+      color: white;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    button:hover {
+      border: 1px solid black;
+      background-color: white;
+      color: black;
+    }
+  }
+}
