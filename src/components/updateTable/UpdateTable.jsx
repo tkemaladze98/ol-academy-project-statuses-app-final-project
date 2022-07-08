@@ -92,10 +92,6 @@ const UpdateTable = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(students);
-  }, [students]);
-
   return (
     <div className="table-form">
       <form>
