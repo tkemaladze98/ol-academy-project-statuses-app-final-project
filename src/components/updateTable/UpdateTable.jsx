@@ -9,7 +9,7 @@ import ProjectsNameForm from "../formGroups/ProjectsNameForm";
 import ProgressBar from "../progressBar/ProgressBar";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
 
-const CreateNewTable = (props) => {
+const UpdateTable = () => {
   const [students, setStudents] = useState([""]);
   const [projects, setProjects] = useState([""]);
   const [title, setTitle] = useState("");
@@ -64,14 +64,12 @@ const CreateNewTable = (props) => {
   };
 
   useEffect(() => {
-    if (tableKey) {
-      CrudServiceForTable.getAll().on("value", onDataChange);
+    CrudServiceForTable.getAll().on("value", onDataChange);
 
-      return () => {
-        CrudServiceForTable.getAll().off("value", onDataChange);
-      };
-    }
-  }, [tableKey]);
+    return () => {
+      CrudServiceForTable.getAll().off("value", onDataChange);
+    };
+  });
 
   useEffect(() => {
     const now = new Date().getTime();
@@ -138,4 +136,4 @@ const CreateNewTable = (props) => {
   );
 };
 
-export default CreateNewTable;
+export default UpdateTable;
