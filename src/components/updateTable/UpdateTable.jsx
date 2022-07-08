@@ -64,12 +64,14 @@ const UpdateTable = () => {
   };
 
   useEffect(() => {
-    CrudServiceForTable.getAll().on("value", onDataChange);
+    if (tableKey) {
+      CrudServiceForTable.getAll().on("value", onDataChange);
 
-    return () => {
-      CrudServiceForTable.getAll().off("value", onDataChange);
-    };
-  });
+      return () => {
+        CrudServiceForTable.getAll().off("value", onDataChange);
+      };
+    }
+  },[]);
 
   useEffect(() => {
     const now = new Date().getTime();
@@ -89,6 +91,10 @@ const UpdateTable = () => {
       setNewTable(JSON.parse(localStorage.getItem("table")));
     }
   }, []);
+
+  useEffect(() => {
+    console.log(students);
+  }, [students]);
 
   return (
     <div className="table-form">
