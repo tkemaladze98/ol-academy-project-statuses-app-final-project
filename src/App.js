@@ -11,6 +11,8 @@ import PageNotFound from "./components/pageNotFound/PageNotFound";
 import NavBar from "./components/navBar/NavBar"
 import CollapsedNavBar from "./components/navBar/CollapsedNavBar"
 import Footer from './components/footer/Footer';
+import TableList from "./components/tableList/TableList";
+import UpdateTable from "./components/updateTable/UpdateTable";
 
 const getWindowDimensions = () => {
   return {
@@ -42,10 +44,12 @@ function App() {
         </header>
         <main>
           <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path='CreateNewTable' element={<CreateNewTable/>} ></Route>
-          <Route path='*' element={<PageNotFound/>} ></Route>
-        </Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/TableList" element={<TableList />} />
+            <Route path="/UpdateTable/:tableKey" element={<UpdateTable />} />
+            <Route path='CreateNewTable' element={<CreateNewTable />} ></Route>
+            <Route path='*' element={<PageNotFound />} ></Route>
+          </Routes>
         </main>
         <footer>
           <Footer />

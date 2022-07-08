@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {  useState } from "react";
+import { useParams,useNavigate } from "react-router-dom";
 import "../../styles/table.scss";
 import { VscCircleLargeFilled } from "react-icons/vsc";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
@@ -11,16 +11,28 @@ const Table = (props) => {
   const [position, setPosition] = useState({});
   const [changeProjectValue, setChangeProjectValue] = useState();
   const [isPopUpShow, setIsPopUpShow] = useState(false);
+  const { tableKey } = useParams();
 
   const updateStatus = (changedTable) => {
     props.setNewTable(changedTable);
     setShowContextMenu(false);
   };
 
-  const createDataInDataBase = () => {
+  const createDataInDataBase = (e) => {
+    e.preventDefault();
     CrudServiceForTable.create(props.table).catch((e) => console.log(e));
-    localStorage.clear()
+    localStorage.clear();
     navigate("/");
+  };
+
+  const updateDataInDataBase = (e) => {
+    e.preventDefault();
+    CrudServiceForTable.update(tableKey, props.table)
+      .then(() => {
+        alert("Updated successfully");
+      })
+      .then(() => navigate("/"))
+      .catch((error) => console.log(error));
   };
 
   const openPopUp = (e) => {
@@ -68,12 +80,10 @@ const Table = (props) => {
           ))}
         </tbody>
       </table>
-      {props.create && (
-        <div className="buttons">
-          <button onClick={props.currentStageDecrement}>Back</button>
-          <button onClick={openPopUp}>Done</button>
-        </div>
-      )}
+      <div className="buttons">
+        <button onClick={props.currentStageDecrement}>Back</button>
+        <button onClick={openPopUp}>Done</button>
+      </div>
       {showContextMenu && (
         <ContextMenuForTableStatuses
           setShowContextMenu={setShowContextMenu}
@@ -86,6 +96,8 @@ const Table = (props) => {
       )}
       {isPopUpShow && (
         <PopUp
+          update={props.update}
+          updateDataInDataBase={updateDataInDataBase}
           closePopUp={closePopUp}
           createDataInDataBase={createDataInDataBase}
         />

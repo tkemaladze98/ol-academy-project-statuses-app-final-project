@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import "../../styles/createNewTable.scss";
 import TableModel from "../../models/TableModel";
 import Table from "../table/Table";
@@ -6,13 +7,15 @@ import TittleForm from "../formGroups/TittleForm";
 import StudentsNameForm from "../formGroups/StudentsNameForm";
 import ProjectsNameForm from "../formGroups/ProjectsNameForm";
 import ProgressBar from "../progressBar/ProgressBar";
+import CrudServiceForTable from "../../services/CrudServiceForTable";
 
-const CreateNewTable = () => {
+const CreateNewTable = (props) => {
   const [students, setStudents] = useState([""]);
   const [projects, setProjects] = useState([""]);
   const [title, setTitle] = useState("");
   const [newTable, setNewTable] = useState();
   const [currentStage, setCurrentStage] = useState(1);
+  const { tableKey } = useParams();
 
   const generateTable = (e) => {
     e.preventDefault();
@@ -35,6 +38,40 @@ const CreateNewTable = () => {
   const currentStageDecrement = () => {
     setCurrentStage(currentStage - 1);
   };
+
+  const onDataChange = (items) => {
+    let tempTable = {};
+
+    items.forEach((item) => {
+      let key = item.key;
+      let data = item.val();
+      if (key === tableKey) {
+        tempTable = {
+          key: key,
+          title: data.title,
+          projects: data.projects,
+          students: data.students,
+        };
+      }
+    });
+    const updatedStudents = tempTable.students.map((student) => {
+      return student.studentName;
+    });
+    setNewTable(tempTable);
+    setTitle(tempTable.title);
+    setProjects(tempTable.projects);
+    setStudents(updatedStudents);
+  };
+
+  useEffect(() => {
+    if (tableKey) {
+      CrudServiceForTable.getAll().on("value", onDataChange);
+
+      return () => {
+        CrudServiceForTable.getAll().off("value", onDataChange);
+      };
+    }
+  }, []);
 
   useEffect(() => {
     const now = new Date().getTime();
@@ -61,20 +98,25 @@ const CreateNewTable = () => {
         {currentStage === 1 && (
           <TittleForm
             title={title}
+            update={true}
             setTitle={setTitle}
             currentStageIncrement={currentStageIncrement}
           />
         )}
         {currentStage === 2 && (
           <StudentsNameForm
+            update={true}
             students={students}
             setStudents={setStudents}
+            table={newTable}
+            setNewTable={setNewTable}
             currentStageDecrement={currentStageDecrement}
             currentStageIncrement={currentStageIncrement}
           />
         )}
         {currentStage === 3 && (
           <ProjectsNameForm
+            update={true}
             projects={projects}
             setProjects={setProjects}
             generateTable={generateTable}
@@ -84,7 +126,7 @@ const CreateNewTable = () => {
         )}
         {currentStage === 4 && (
           <Table
-            update={false}
+            update={true}
             currentStageDecrement={currentStageDecrement}
             table={newTable}
             setNewTable={setNewTable}

@@ -1,0 +1,44 @@
+.table-list {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  .spinner-paragraph {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    .empty-list-paragraph {
+      text-align: center;
+      font-size: 40px;
+      color: red;
+    }
+  }
+  .spinner {
+    width: 100px;
+    height: 100px;
+    margin: auto;
+  }
+  .table-wrapper {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h3 {
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: burlywood;
+      th {
+        border: 1px solid black;
+        text-align: center;
+      }
+    }
+  }
+}

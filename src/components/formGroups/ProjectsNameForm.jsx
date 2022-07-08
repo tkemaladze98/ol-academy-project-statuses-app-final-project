@@ -48,10 +48,7 @@ const ProjectsNameForm = (props) => {
     });
     let tmpStorage = JSON.stringify(newProjectsNamesArray);
     localStorage.setItem("projects", tmpStorage);
-    localStorage.setItem(
-      "expiry",
-      new Date().getTime() + 10 * 60 * 1000
-    );
+    localStorage.setItem("expiry", new Date().getTime() + 10 * 60 * 1000);
   };
 
   return (
@@ -67,7 +64,7 @@ const ProjectsNameForm = (props) => {
               placeholder="Enter here"
               value={projectName}
               onChange={(e) => {
-                saveToLocalStorage(e, index);
+                props.update !== true && saveToLocalStorage(e, index);
                 addProjectName(e, index);
               }}
             />

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TittleForm = ({ title, setTitle, currentStageIncrement }) => {
+const TittleForm = ({ title, setTitle, currentStageIncrement, update }) => {
   return (
     <div className="form-group-wrapper">
       <div className="form-group">
@@ -12,7 +12,7 @@ const TittleForm = ({ title, setTitle, currentStageIncrement }) => {
           placeholder="Enter here"
           value={title}
           onChange={(e) => {
-            localStorage.setItem("title", e.target.value);
+            update !== true && localStorage.setItem("title", e.target.value);
             localStorage.setItem(
               "expiry",
               new Date().getTime() + 10 * 60 * 1000

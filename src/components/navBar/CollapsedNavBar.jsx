@@ -17,6 +17,9 @@ const CollapsedNavBar = () => {
           <Link className="nav-page" to="/">
             Home
           </Link>
+          <Link className="nav-page" to="/TableList">
+            Table-List
+          </Link>
         </nav>
       )}
     </div>

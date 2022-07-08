@@ -6,6 +6,9 @@ const StudentsNameForm = ({
   setStudents,
   currentStageIncrement,
   currentStageDecrement,
+  table,
+  setNewTable,
+  update,
 }) => {
   const [isAnyEmptyField, setIsAnyEmptyField] = useState();
 
@@ -22,6 +25,14 @@ const StudentsNameForm = ({
       }
       return student;
     });
+    if (update) {
+      const newTable = table;
+      newTable.students = [
+        ...table.students,
+        { studentName: studentName, projects: {} },
+      ];
+      setNewTable(newTable);
+    }
     setStudents(newStudentsNamesArray);
   };
 
@@ -41,7 +52,7 @@ const StudentsNameForm = ({
     setStudents(tmpStudentsArray);
   };
 
-  const saveToLocalStorage = (e,currentIndex) => {
+  const saveToLocalStorage = (e, currentIndex) => {
     const studentName = e.target.value;
     const newStudentsNamesArray = students.map((student, index) => {
       if (index === currentIndex) {
@@ -51,10 +62,7 @@ const StudentsNameForm = ({
     });
     let tmpStorage = JSON.stringify(newStudentsNamesArray);
     localStorage.setItem("students", tmpStorage);
-    localStorage.setItem(
-      "expiry",
-      new Date().getTime() + 10 * 60 * 1000
-    );
+    localStorage.setItem("expiry", new Date().getTime() + 10 * 60 * 1000);
   };
   return (
     <div className="form-group-wrapper">
@@ -69,7 +77,7 @@ const StudentsNameForm = ({
               placeholder="Enter here"
               value={studentName}
               onChange={(e) => {
-                saveToLocalStorage(e,index);
+                update !== true && saveToLocalStorage(e, index);
                 addStudentName(e, index);
               }}
             />

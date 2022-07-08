@@ -22,7 +22,7 @@ function PopUp(props) {
   });
 
   const navigateHomePageWithoutSave = () => {
-    localStorage.clear()
+    localStorage.clear();
     navigate("/");
   };
 
@@ -40,7 +40,15 @@ function PopUp(props) {
         </button>
         <p>Are you sure you want to save?</p>
         <article className="buttons">
-          <button onClick={props.createDataInDataBase}>Yes</button>
+          <button
+            onClick={
+              props.update
+                ? props.updateDataInDataBase
+                : props.createDataInDataBase
+            }
+          >
+            Yes
+          </button>
           <button onClick={navigateHomePageWithoutSave}>No</button>
         </article>
       </div>
