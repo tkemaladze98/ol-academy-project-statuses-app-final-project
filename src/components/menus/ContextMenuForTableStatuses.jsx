@@ -11,6 +11,9 @@ const ContextMenuForTableStatuses = (props) => {
     tmpTable.students[props.changeProjectValue.index].projects[
       props.changeProjectValue.project
     ] = e.target.style.backgroundColor;
+    let tmpStorage = JSON.stringify(tmpTable);
+    localStorage.setItem("table", tmpStorage);
+    localStorage.setItem("expiry", new Date().getTime() + 10 * 60 * 1000);
     props.updateStatus(tmpTable);
   };
 

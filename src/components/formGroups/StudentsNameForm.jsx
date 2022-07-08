@@ -41,11 +41,21 @@ const StudentsNameForm = ({
     setStudents(tmpStudentsArray);
   };
 
-//   const saveToLocalStorage = () => {
-//     let tmpStorage = localStorage.getItem("current");
-//     tmpStorage.students = students;
-//     localStorage.setItem("current", tmpStorage);
-//   };
+  const saveToLocalStorage = (e,currentIndex) => {
+    const studentName = e.target.value;
+    const newStudentsNamesArray = students.map((student, index) => {
+      if (index === currentIndex) {
+        student = studentName;
+      }
+      return student;
+    });
+    let tmpStorage = JSON.stringify(newStudentsNamesArray);
+    localStorage.setItem("students", tmpStorage);
+    localStorage.setItem(
+      "expiry",
+      new Date().getTime() + 10 * 60 * 1000
+    );
+  };
   return (
     <div className="form-group-wrapper">
       {students.map((studentName, index) => {
@@ -59,7 +69,7 @@ const StudentsNameForm = ({
               placeholder="Enter here"
               value={studentName}
               onChange={(e) => {
-                // saveToLocalStorage()
+                saveToLocalStorage(e,index);
                 addStudentName(e, index);
               }}
             />

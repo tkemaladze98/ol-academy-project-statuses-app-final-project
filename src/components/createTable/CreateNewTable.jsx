@@ -36,18 +36,24 @@ const CreateNewTable = () => {
     setCurrentStage(currentStage - 1);
   };
 
-  // useEffect(() => {
-  //   const currentData = localStorage.getItem("current");
-  //   if (currentData.title !== undefined) {
-  //     setTitle(currentData.title);
-  //   }
-  //   if (currentData.students !== undefined) {
-  //     setStudents(currentData.students);
-  //   }
-  //   if (currentData.projects !== undefined) {
-  //     setProjects(currentData.projects);
-  //   }
-  // }, []);
+  useEffect(() => {
+    const now = new Date().getTime();
+    if (localStorage.getItem("expiry") < now) {
+      localStorage.clear();
+    }
+    if (localStorage.getItem("title") !== null) {
+      setTitle(localStorage.getItem("title"));
+    }
+    if (localStorage.getItem("students") !== null) {
+      setStudents(JSON.parse(localStorage.getItem("students")));
+    }
+    if (localStorage.getItem("projects") !== null) {
+      setProjects(JSON.parse(localStorage.getItem("projects")));
+    }
+    if (localStorage.getItem("table") !== null) {
+      setNewTable(JSON.parse(localStorage.getItem("table")));
+    }
+  }, []);
 
   return (
     <div className="table-form">
@@ -78,6 +84,7 @@ const CreateNewTable = () => {
         )}
         {currentStage === 4 && (
           <Table
+            create
             currentStageDecrement={currentStageDecrement}
             table={newTable}
             setNewTable={setNewTable}

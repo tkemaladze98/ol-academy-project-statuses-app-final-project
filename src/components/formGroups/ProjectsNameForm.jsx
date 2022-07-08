@@ -38,11 +38,21 @@ const ProjectsNameForm = (props) => {
     props.setProjects(tmpProjectsArray);
   };
 
-//   const saveToLocalStorage = () => {
-//     let tmpStorage = localStorage.getItem("current");
-//     tmpStorage.projects = props.projects;
-//     localStorage.setItem("current", tmpStorage);
-//   };
+  const saveToLocalStorage = (e, currentIndex) => {
+    const projectName = e.target.value;
+    const newProjectsNamesArray = props.projects.map((project, index) => {
+      if (index === currentIndex) {
+        project = projectName;
+      }
+      return project;
+    });
+    let tmpStorage = JSON.stringify(newProjectsNamesArray);
+    localStorage.setItem("projects", tmpStorage);
+    localStorage.setItem(
+      "expiry",
+      new Date().getTime() + 10 * 60 * 1000
+    );
+  };
 
   return (
     <div className="form-group-wrapper">
@@ -57,7 +67,7 @@ const ProjectsNameForm = (props) => {
               placeholder="Enter here"
               value={projectName}
               onChange={(e) => {
-                // saveToLocalStorage();
+                saveToLocalStorage(e, index);
                 addProjectName(e, index);
               }}
             />

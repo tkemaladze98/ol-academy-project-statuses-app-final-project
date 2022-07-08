@@ -22,6 +22,7 @@ function PopUp(props) {
   });
 
   const navigateHomePageWithoutSave = () => {
+    localStorage.clear()
     navigate("/");
   };
 

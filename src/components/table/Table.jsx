@@ -19,7 +19,8 @@ const Table = (props) => {
 
   const createDataInDataBase = () => {
     CrudServiceForTable.create(props.table).catch((e) => console.log(e));
-    navigate("/")
+    localStorage.clear()
+    navigate("/");
   };
 
   const openPopUp = (e) => {
@@ -67,10 +68,12 @@ const Table = (props) => {
           ))}
         </tbody>
       </table>
-      <div className="buttons">
-        <button onClick={props.currentStageDecrement}>Back</button>
-        <button onClick={openPopUp}>Done</button>
-      </div>
+      {props.create && (
+        <div className="buttons">
+          <button onClick={props.currentStageDecrement}>Back</button>
+          <button onClick={openPopUp}>Done</button>
+        </div>
+      )}
       {showContextMenu && (
         <ContextMenuForTableStatuses
           setShowContextMenu={setShowContextMenu}

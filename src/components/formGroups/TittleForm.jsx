@@ -12,7 +12,11 @@ const TittleForm = ({ title, setTitle, currentStageIncrement }) => {
           placeholder="Enter here"
           value={title}
           onChange={(e) => {
-            // localStorage.setItem("current", { title: e.target.value });
+            localStorage.setItem("title", e.target.value);
+            localStorage.setItem(
+              "expiry",
+              new Date().getTime() + 10 * 60 * 1000
+            );
             setTitle(e.target.value);
           }}
         />
