@@ -49,60 +49,72 @@ const TableList = () => {
     }, 5000);
   }, [tables]);
 
+  const deleteAll = (e) => {
+    e.preventDefault();
+    CrudServiceForTable.deleteAll();
+  };
+
   return (
-    <div className="table-list">
-      {tables.length === 0 ? (
-        <div className="spinner-paragraph">
-          {isEmptyTableList && (
-            <p className="empty-list-paragraph">Table List May be Empty</p>
-          )}
-          <Spinner className="spinner" animation="border" />
-        </div>
-      ) : (
-        tables.map((table, tableIndex) => {
-          return (
-            <div key={tableIndex} className="table-wrapper">
-              <h3>{table.title}</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th
-                      style={{ cursor: "pointer" }}
-                      onClick={(e) => showMenu(e, table)}
-                    >
-                      ...
-                    </th>
-                    {table.students?.map((item, index) => (
-                      <th key={index}>{item.studentName}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {table.projects?.map((project, index) => (
-                    <tr key={index}>
-                      <th>{project}</th>
-                      {table.students.map((student, i) => (
-                        <th key={i}>
-                          <VscCircleLargeFilled
-                            style={{ color: student.projects[project] }}
-                          />
-                        </th>
+    <div className="table-list-wrapper">
+      <div className="table-list">
+        {tables.length === 0 ? (
+          <div className="spinner-paragraph">
+            {isEmptyTableList && (
+              <p className="empty-list-paragraph">Table List May be Empty</p>
+            )}
+            <Spinner className="spinner" animation="border" />
+          </div>
+        ) : (
+          tables.map((table, tableIndex) => {
+            return (
+              <div key={tableIndex} className="table-wrapper">
+                <h3>{table.title}</h3>
+                <table>
+                  <thead>
+                    <tr>
+                      <th
+                        style={{ cursor: "pointer" }}
+                        onClick={(e) => showMenu(e, table)}
+                      >
+                        ...
+                      </th>
+                      {table.students?.map((item, index) => (
+                        <th key={index}>{item.studentName}</th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          );
-        })
-      )}
-      {showTableMenu && (
-        <TableMenu
-          updateTableKey={updateTableKey}
-          top={position.top}
-          left={position.left}
-          setShowTableMenu={setShowTableMenu}
-        />
+                  </thead>
+                  <tbody>
+                    {table.projects?.map((project, index) => (
+                      <tr key={index}>
+                        <th>{project}</th>
+                        {table.students.map((student, i) => (
+                          <th key={i}>
+                            <VscCircleLargeFilled
+                              style={{ color: student.projects[project] }}
+                            />
+                          </th>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          })
+        )}
+        {showTableMenu && (
+          <TableMenu
+            updateTableKey={updateTableKey}
+            top={position.top}
+            left={position.left}
+            setShowTableMenu={setShowTableMenu}
+          />
+        )}
+      </div>
+      {tables.length !== 0 && (
+        <button onClick={deleteAll} className="delete-all">
+          Delete All Tables
+        </button>
       )}
     </div>
   );

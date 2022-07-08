@@ -71,7 +71,7 @@ const CreateNewTable = (props) => {
         CrudServiceForTable.getAll().off("value", onDataChange);
       };
     }
-  }, []);
+  }, [tableKey]);
 
   useEffect(() => {
     const now = new Date().getTime();
