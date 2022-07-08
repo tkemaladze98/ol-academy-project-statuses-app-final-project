@@ -71,6 +71,7 @@ const UpdateTable = () => {
         CrudServiceForTable.getAll().off("value", onDataChange);
       };
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   useEffect(() => {
