@@ -20,7 +20,7 @@ const Table = (props) => {
 
   const createDataInDataBase = (e) => {
     e.preventDefault();
-    CrudServiceForTable.create(props.table).catch((e) => console.log(e));
+    CrudServiceForTable.create(props.table).catch((error) => console.log(error));
     localStorage.clear();
     navigate("/");
   };
