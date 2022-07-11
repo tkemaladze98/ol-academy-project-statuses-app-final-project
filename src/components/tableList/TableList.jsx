@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
 import "../../styles/tableList.scss";
 import { VscCircleLargeFilled } from "react-icons/vsc";
-import Spinner from "../spinner/Spinner"
-import TableMenu from "../menus/TableMenu";
+import Spinner from "../Spinner/Spinner";
+import TableMenu from "../Menus/TableMenu";
 
 const TableList = () => {
   const [tables, setTables] = useState([]);
@@ -62,7 +62,7 @@ const TableList = () => {
             {isEmptyTableList && (
               <p className="empty-list-paragraph">Table List May be Empty</p>
             )}
-            <Spinner/>
+            <Spinner />
           </div>
         ) : (
           tables.map((table, tableIndex) => {
@@ -90,6 +90,7 @@ const TableList = () => {
                         {table.students.map((student, i) => (
                           <th key={i}>
                             <VscCircleLargeFilled
+                              className="circle"
                               style={{ color: student.projects[project] }}
                             />
                           </th>

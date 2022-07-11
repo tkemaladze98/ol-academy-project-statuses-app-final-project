@@ -29,6 +29,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      overflow-x: scroll;
       h3 {
         text-align: center;
       }
@@ -39,11 +40,14 @@
         th {
           border: 1px solid black;
           text-align: center;
+          .circle {
+            font-size: 40px;
+          }
         }
       }
     }
   }
-  .delete-all{
+  .delete-all {
     background-color: red;
     min-height: 40px;
     max-width: 150px;
