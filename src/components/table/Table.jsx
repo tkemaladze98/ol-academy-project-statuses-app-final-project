@@ -29,17 +29,11 @@ const Table = (props) => {
 
   const createDataInDataBase = (e) => {
     e.preventDefault();
-<<<<<<< Updated upstream
-    CrudServiceForTable.create(props.table).catch((e) => console.log(e));
-    localStorage.clear();
-    navigate("/");
-=======
     CrudServiceForTable.create(props.table)
       .then(() => {
         showSuccessAlert();
       })
       .catch((error) => console.log(error));
->>>>>>> Stashed changes
   };
 
   const updateDataInDataBase = (e) => {
