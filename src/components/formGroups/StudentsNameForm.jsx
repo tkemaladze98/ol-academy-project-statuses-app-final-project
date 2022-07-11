@@ -19,12 +19,10 @@ const StudentsNameForm = ({
 
   const addStudentName = (e, currentIndex) => {
     const studentName = e.target.value;
-    const newStudentsNamesArray = students.map((student, index) => {
-      if (index === currentIndex) {
-        student = studentName;
-      }
-      return student;
-    });
+    const newStudentsNamesArray = generateNewStudentsArray(
+      studentName,
+      currentIndex
+    );
     if (update) {
       const newTable = table;
       newTable.students = [
@@ -34,6 +32,15 @@ const StudentsNameForm = ({
       setNewTable(newTable);
     }
     setStudents(newStudentsNamesArray);
+  };
+
+  const generateNewStudentsArray = (studentName, currentIndex) => {
+    return students.map((student, index) => {
+      if (index === currentIndex) {
+        student = studentName;
+      }
+      return student;
+    });
   };
 
   const style = {
@@ -54,12 +61,10 @@ const StudentsNameForm = ({
 
   const saveToLocalStorage = (e, currentIndex) => {
     const studentName = e.target.value;
-    const newStudentsNamesArray = students.map((student, index) => {
-      if (index === currentIndex) {
-        student = studentName;
-      }
-      return student;
-    });
+    const newStudentsNamesArray = generateNewStudentsArray(
+      studentName,
+      currentIndex
+    );
     let tmpStorage = JSON.stringify(newStudentsNamesArray);
     localStorage.setItem("students", tmpStorage);
     localStorage.setItem("expiry", new Date().getTime() + 10 * 60 * 1000);

@@ -13,12 +13,10 @@ const ProjectsNameForm = (props) => {
 
   const addProjectName = (e, currentIndex) => {
     const projectName = e.target.value;
-    const newProjectsNamesArray = props.projects.map((project, index) => {
-      if (index === currentIndex) {
-        project = projectName;
-      }
-      return project;
-    });
+    const newProjectsNamesArray = generateNewProjectsArray(
+      projectName,
+      currentIndex
+    );
     props.setProjects(newProjectsNamesArray);
   };
 
@@ -31,6 +29,15 @@ const ProjectsNameForm = (props) => {
     props.setProjects([...props.projects, ""]);
   };
 
+  const generateNewProjectsArray = (projectName, currentIndex) => {
+    return props.projects.map((project, index) => {
+      if (index === currentIndex) {
+        project = projectName;
+      }
+      return project;
+    });
+  };
+
   const removeInput = (currentIndex) => {
     const tmpProjectsArray = props.projects.filter(
       (_project, index) => index !== currentIndex
@@ -40,12 +47,10 @@ const ProjectsNameForm = (props) => {
 
   const saveToLocalStorage = (e, currentIndex) => {
     const projectName = e.target.value;
-    const newProjectsNamesArray = props.projects.map((project, index) => {
-      if (index === currentIndex) {
-        project = projectName;
-      }
-      return project;
-    });
+    const newProjectsNamesArray = generateNewProjectsArray(
+      projectName,
+      currentIndex
+    );
     let tmpStorage = JSON.stringify(newProjectsNamesArray);
     localStorage.setItem("projects", tmpStorage);
     localStorage.setItem("expiry", new Date().getTime() + 10 * 60 * 1000);
