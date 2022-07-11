@@ -33,6 +33,9 @@ const Table = (props) => {
       .then(() => {
         showSuccessAlert();
       })
+      .then(() => {
+        localStorage.clear();
+      })
       .catch((error) => console.log(error));
   };
 
