@@ -53,6 +53,7 @@ const CreateNewTable = () => {
     if (localStorage.getItem("table") !== null) {
       setNewTable(JSON.parse(localStorage.getItem("table")));
     }
+    return;
   }, []);
 
   return (
