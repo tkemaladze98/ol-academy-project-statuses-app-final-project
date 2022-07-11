@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/createNewTable.scss";
 import TableModel from "../../models/TableModel";
-import Table from "../table/Table";
-import TittleForm from "../formGroups/TittleForm";
-import StudentsNameForm from "../formGroups/StudentsNameForm";
-import ProjectsNameForm from "../formGroups/ProjectsNameForm";
-import ProgressBar from "../progressBar/ProgressBar";
+import Table from "../Table/Table";
+import TittleForm from "../FormGroups/TittleForm";
+import StudentsNameForm from "../FormGroups/StudentsNameForm";
+import ProjectsNameForm from "../FormGroups/ProjectsNameForm";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
 
 const UpdateTable = () => {
@@ -73,26 +73,6 @@ const UpdateTable = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
-
-  useEffect(() => {
-    const now = new Date().getTime();
-    if (localStorage.getItem("expiry") < now) {
-      localStorage.clear();
-    }
-    if (localStorage.getItem("title") !== null) {
-      setTitle(localStorage.getItem("title"));
-    }
-    if (localStorage.getItem("students") !== null) {
-      setStudents(JSON.parse(localStorage.getItem("students")));
-    }
-    if (localStorage.getItem("projects") !== null) {
-      setProjects(JSON.parse(localStorage.getItem("projects")));
-    }
-    if (localStorage.getItem("table") !== null) {
-      setNewTable(JSON.parse(localStorage.getItem("table")));
-    }
-  }, []);
-
   return (
     <div className="table-form">
       <form>
