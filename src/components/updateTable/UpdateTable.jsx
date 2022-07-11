@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "../../styles/createNewTable.scss";
 import TableModel from "../../models/TableModel";
-import Table from "../table/Table";
-import TittleForm from "../formGroups/TittleForm";
-import StudentsNameForm from "../formGroups/StudentsNameForm";
-import ProjectsNameForm from "../formGroups/ProjectsNameForm";
-import ProgressBar from "../progressBar/ProgressBar";
+import Table from "../Table/Table";
+import TittleForm from "../FormGroups/TittleForm";
+import StudentsNameForm from "../FormGroups/StudentsNameForm";
+import ProjectsNameForm from "../FormGroups/ProjectsNameForm";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
 
 const UpdateTable = () => {

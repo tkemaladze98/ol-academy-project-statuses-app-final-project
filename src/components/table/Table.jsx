@@ -1,10 +1,11 @@
-import React, {  useState } from "react";
-import { useParams,useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import "../../styles/table.scss";
 import { VscCircleLargeFilled } from "react-icons/vsc";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
-import ContextMenuForTableStatuses from "../menus/ContextMenuForTableStatuses";
-import PopUp from "../popUp/PopUp";
+import ContextMenuForTableStatuses from "../Menus/ContextMenuForTableStatuses";
+import PopUp from "../PopUp/PopUp";
+import Swal from "sweetalert2";
 const Table = (props) => {
   const navigate = useNavigate();
   const [showContextMenu, setShowContextMenu] = useState(false);
@@ -16,6 +17,14 @@ const Table = (props) => {
   const updateStatus = (changedTable) => {
     props.setNewTable(changedTable);
     setShowContextMenu(false);
+  };
+  const showSuccessAlert = () => {
+    Swal.fire({
+      title: "Success",
+      text: "Alert successful",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => navigate("/"));
   };
 
   const createDataInDataBase = (e) => {
@@ -31,9 +40,8 @@ const Table = (props) => {
     e.preventDefault();
     CrudServiceForTable.update(tableKey, props.table)
       .then(() => {
-        alert("Updated successfully");
+        showSuccessAlert();
       })
-      .then(() => navigate("/"))
       .catch((error) => console.log(error));
   };
 
