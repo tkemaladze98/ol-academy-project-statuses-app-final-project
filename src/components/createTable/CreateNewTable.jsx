@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/createNewTable.scss";
 import TableModel from "../../models/TableModel";
-import Table from "../Table/Table";
-import TittleForm from "../FormGroups/TittleForm";
-import StudentsNameForm from "../FormGroups/StudentsNameForm";
-import ProjectsNameForm from "../FormGroups/ProjectsNameForm";
-import ProgressBar from "../ProgressBar/ProgressBar";
+import Table from "../table/Table";
+import TittleForm from "../formGroups/TittleForm";
+import StudentsNameForm from "../formGroups/StudentsNameForm";
+import ProjectsNameForm from "../formGroups/ProjectsNameForm";
+import ProgressBar from "../progressBar/ProgressBar";
 
 const CreateNewTable = () => {
   const [students, setStudents] = useState([""]);
@@ -53,8 +53,6 @@ const CreateNewTable = () => {
     if (localStorage.getItem("table") !== null) {
       setNewTable(JSON.parse(localStorage.getItem("table")));
     }
-
-    return localStorage.clear();
   }, []);
 
   return (

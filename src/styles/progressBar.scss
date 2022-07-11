@@ -1,13 +1,12 @@
-.outside-progress {
-  margin-top: 60px;
-  width: 100%;
-  min-height: 15px;
-  background-color: rgb(184, 181, 181);
-  border-radius: 10px;
-  overflow: hidden;
-  .progress-bar {
+.outside-progress{
+    margin-top: 60px;
+    width: 100%;
     min-height: 15px;
-    background-color: green;
-    transition: width ease 0.5s;
-  }
+    background-color: rgb(184, 181, 181);
+    border-radius: 10px;
+    overflow: hidden;
+    .progress-bar{
+        min-height: 15px;
+        background-color: green;
+    }
 }

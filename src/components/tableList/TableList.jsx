@@ -90,7 +90,6 @@ const TableList = () => {
                         {table.students.map((student, i) => (
                           <th key={i}>
                             <VscCircleLargeFilled
-                              className="circle"
                               style={{ color: student.projects[project] }}
                             />
                           </th>

@@ -5,14 +5,14 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import CreateNewTable from "./components/CreateTable/CreateNewTable";
-import HomePage from "./components/HomePage/HomePage";
-import PageNotFound from "./components/PageNotFound/PageNotFound";
-import NavBar from "./components/NavBar/NavBar"
-import CollapsedNavBar from "./components/NavBar/CollapsedNavBar"
-import Footer from './components/Footer/Footer';
-import TableList from "./components/TableList/TableList";
-import UpdateTable from "./components/UpdateTable/UpdateTable";
+import CreateNewTable from "./components/createTable/CreateNewTable";
+import HomePage from "./components/homePage/HomePage";
+import PageNotFound from "./components/pageNotFound/PageNotFound";
+import NavBar from "./components/navBar/NavBar"
+import CollapsedNavBar from "./components/navBar/CollapsedNavBar"
+import Footer from './components/footer/Footer';
+import TableList from "./components/tableList/TableList";
+import UpdateTable from "./components/updateTable/UpdateTable";
 
 const getWindowDimensions = () => {
   return {
