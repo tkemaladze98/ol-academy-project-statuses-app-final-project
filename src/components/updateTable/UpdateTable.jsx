@@ -9,7 +9,7 @@ import ProjectsNameForm from "../FormGroups/ProjectsNameForm";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
 
-const CreateNewTable = (props) => {
+const UpdateTable = () => {
   const [students, setStudents] = useState([""]);
   const [projects, setProjects] = useState([""]);
   const [title, setTitle] = useState("");
@@ -71,32 +71,8 @@ const CreateNewTable = (props) => {
         CrudServiceForTable.getAll().off("value", onDataChange);
       };
     }
-<<<<<<< Updated upstream
-  }, [tableKey]);
-
-  useEffect(() => {
-    const now = new Date().getTime();
-    if (localStorage.getItem("expiry") < now) {
-      localStorage.clear();
-    }
-    if (localStorage.getItem("title") !== null) {
-      setTitle(localStorage.getItem("title"));
-    }
-    if (localStorage.getItem("students") !== null) {
-      setStudents(JSON.parse(localStorage.getItem("students")));
-    }
-    if (localStorage.getItem("projects") !== null) {
-      setProjects(JSON.parse(localStorage.getItem("projects")));
-    }
-    if (localStorage.getItem("table") !== null) {
-      setNewTable(JSON.parse(localStorage.getItem("table")));
-    }
-  }, []);
-
-=======
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
->>>>>>> Stashed changes
   return (
     <div className="table-form">
       <form>
@@ -143,4 +119,4 @@ const CreateNewTable = (props) => {
   );
 };
 
-export default CreateNewTable;
+export default UpdateTable;

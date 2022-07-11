@@ -2,13 +2,8 @@ import { useEffect, useState } from "react";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
 import "../../styles/tableList.scss";
 import { VscCircleLargeFilled } from "react-icons/vsc";
-<<<<<<< Updated upstream
-import { Spinner } from "reactstrap";
-import TableMenu from "../menus/TableMenu";
-=======
 import Spinner from "../Spinner/Spinner";
 import TableMenu from "../Menus/TableMenu";
->>>>>>> Stashed changes
 
 const TableList = () => {
   const [tables, setTables] = useState([]);
@@ -67,11 +62,7 @@ const TableList = () => {
             {isEmptyTableList && (
               <p className="empty-list-paragraph">Table List May be Empty</p>
             )}
-<<<<<<< Updated upstream
-            <Spinner className="spinner" animation="border" />
-=======
             <Spinner />
->>>>>>> Stashed changes
           </div>
         ) : (
           tables.map((table, tableIndex) => {
