@@ -12,17 +12,17 @@ const TableListPage = () => {
   const [updateTableKey, setUpdateTableKey] = useState();
   const [isEmptyTableList, setIsEmptyTableList] = useState(false);
 
-  const onDataChange = (items) => {
-    let tempTables = [];
-    items.forEach((item) => {
-      let key = item.key;
-      let { title, projects, students } = item.val();
-      tempTables.push({ key, title, projects, students });
-    });
-
-    setTables(tempTables);
-  };
   useEffect(() => {
+    const onDataChange = (items) => {
+      let tempTables = [];
+      items.forEach((item) => {
+        let key = item.key;
+        let { title, projects, students } = item.val();
+        tempTables.push({ key, title, projects, students });
+      });
+
+      setTables(tempTables);
+    };
     CrudServiceForTable.getAll().on("value", onDataChange);
 
     return () => {

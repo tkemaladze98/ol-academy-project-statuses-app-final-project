@@ -5,8 +5,8 @@ import Swal from "sweetalert2";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
 import ContextMenuForTableStatuses from "../Menus/ContextMenuForTableStatuses";
 import PopUp from "../PopUp/PopUpPage";
-
 import "./table.scss";
+
 const TablePage = (props) => {
   const navigate = useNavigate();
   const [showContextMenu, setShowContextMenu] = useState(false);
