@@ -1,25 +1,25 @@
-import React, { useEffect, useRef } from "react";
-import { AiOutlineClose } from "react-icons/ai";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/popUp.scss";
+import { AiOutlineClose } from "react-icons/ai";
+import "./popUp.scss";
 
-function PopUp(props) {
+function PopUpPage(props) {
   const popupRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
-    if (!popupRef.current?.contains(e.target)) {
-      props.closePopUp();
-    }
-  };
-
   useEffect(() => {
+    const handleClick = (e) => {
+      if (!popupRef.current?.contains(e.target)) {
+        props.closePopUp();
+      }
+    };
+
     document.addEventListener("click", handleClick);
 
     return function cleanUp() {
       document.removeEventListener("click", handleClick);
     };
-  });
+  }, [props]);
 
   const navigateHomePageWithoutSave = () => {
     localStorage.clear();
@@ -56,4 +56,4 @@ function PopUp(props) {
   );
 }
 
-export default PopUp;
+export default PopUpPage;

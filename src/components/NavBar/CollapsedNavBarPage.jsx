@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import "../../styles/colapsedNavBar.scss";
+import { AiOutlineMenu } from "react-icons/ai";
+import "./colapsedNavBar.scss";
 
-const CollapsedNavBar = () => {
+const CollapsedNavBarPage = () => {
   const [isMenuClicked, setIsMenuClicked] = useState(false);
 
   const showMenu = () => {
@@ -26,4 +26,4 @@ const CollapsedNavBar = () => {
   );
 };
 
-export default CollapsedNavBar;
+export default CollapsedNavBarPage;

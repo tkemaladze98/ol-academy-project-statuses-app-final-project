@@ -1,58 +1,41 @@
-import './App.scss'
-import { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
 } from "react-router-dom";
-import CreateNewTable from "./components/CreateTable/CreateNewTable";
+import CreateNewTablePage from "./components/CreateTable/CreateNewTablePage";
 import HomePage from "./components/HomePage/HomePage";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
-import NavBar from "./components/NavBar/NavBar"
-import CollapsedNavBar from "./components/NavBar/CollapsedNavBar"
-import Footer from './components/Footer/Footer';
-import TableList from "./components/TableList/TableList";
-import UpdateTable from "./components/UpdateTable/UpdateTable";
-
-const getWindowDimensions = () => {
-  return {
-    width: window.innerWidth,
-    height: window.innerHeight
-  };
-}
+import NavBarPage from "./components/NavBar/NavBarPage"
+import CollapsedNavBarPage from "./components/NavBar/CollapsedNavBarPage"
+import FooterPage from './components/Footer/FooterPage';
+import TableListPage from "./components/TableList/TableListPage";
+import UpdateTablePage from "./components/UpdateTable/UpdateTablePage";
+import useWindowSize from "./helpers/useWindowSize";
+import './App.scss';
 
 function App() {
-  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
-
-
-  const handleResize = () => {
-    setWindowDimensions(getWindowDimensions())
-  }
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [windowDimensions]);
+  const windowDimensions = useWindowSize()
 
   return (
     <div className="App">
       <Router>
         <header>
           {windowDimensions.width <= 500 ? (
-            <CollapsedNavBar />
-          ) : (<NavBar />)}
+            <CollapsedNavBarPage />
+          ) : (<NavBarPage />)}
         </header>
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/TableList" element={<TableList />} />
-            <Route path="/UpdateTable/:tableKey" element={<UpdateTable />} />
-            <Route path='CreateNewTable' element={<CreateNewTable />} ></Route>
+            <Route path="/TableList" element={<TableListPage />} />
+            <Route path="/UpdateTable/:tableKey" element={<UpdateTablePage />} />
+            <Route path='CreateNewTable' element={<CreateNewTablePage />} ></Route>
             <Route path='*' element={<PageNotFound />} ></Route>
           </Routes>
         </main>
         <footer>
-          <Footer />
+          <FooterPage />
         </footer>
       </Router>
     </div>

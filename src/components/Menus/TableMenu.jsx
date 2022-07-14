@@ -1,19 +1,18 @@
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/tableMenu.scss";
 import CrudServiceForTable from "../../services/CrudServiceForTable";
+import "./tableMenu.scss";
 
-const TableMenu = (props) => {
+const TableMenu = ({ setShowTableMenu, top, left, updateTableKey }) => {
   const menu = useRef();
   const navigate = useNavigate();
 
-  const handleClick = (e) => {
-    if (!menu.current?.contains(e.target)) {
-      props.setShowTableMenu(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClick = (e) => {
+      if (!menu.current?.contains(e.target)) {
+        setShowTableMenu(false);
+      }
+    };
     if (menu !== null) {
       document.addEventListener("click", handleClick);
       document.addEventListener("contextmenu", handleClick);
@@ -22,20 +21,20 @@ const TableMenu = (props) => {
       document.removeEventListener("click", handleClick);
       document.removeEventListener("contextmenu", handleClick);
     };
-  });
+  }, [setShowTableMenu]);
 
   const style = {
-    top: props.top,
-    left: props.left,
+    top: top,
+    left: left,
   };
 
   const goToEdit = () => {
-    navigate(`/UpdateTable/${props.updateTableKey}`);
+    navigate(`/UpdateTable/${updateTableKey}`);
   };
 
   const deleteTable = () => {
-    CrudServiceForTable.delete(props.updateTableKey);
-    props.setShowTableMenu(false);
+    CrudServiceForTable.delete(updateTableKey);
+    setShowTableMenu(false);
   };
   return (
     <div ref={menu} className="table-menu" style={style}>

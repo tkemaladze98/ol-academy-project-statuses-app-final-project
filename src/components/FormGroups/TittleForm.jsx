@@ -1,5 +1,4 @@
-import React from "react";
-
+import setExpiryTime from "../../utils/getExpiryTime";
 const TittleForm = ({ title, setTitle, currentStageIncrement, update }) => {
   return (
     <div className="form-group-wrapper">
@@ -12,11 +11,10 @@ const TittleForm = ({ title, setTitle, currentStageIncrement, update }) => {
           placeholder="Enter here"
           value={title}
           onChange={(e) => {
-            update !== true && localStorage.setItem("title", e.target.value);
-            localStorage.setItem(
-              "expiry",
-              new Date().getTime() + 10 * 60 * 1000
-            );
+            if (!update) {
+              localStorage.setItem("title", e.target.value);
+              setExpiryTime();
+            }
             setTitle(e.target.value);
           }}
         />

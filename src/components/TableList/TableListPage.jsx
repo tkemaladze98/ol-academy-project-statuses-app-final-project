@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import CrudServiceForTable from "../../services/CrudServiceForTable";
-import "../../styles/tableList.scss";
 import { VscCircleLargeFilled } from "react-icons/vsc";
+import CrudServiceForTable from "../../services/CrudServiceForTable";
 import Spinner from "../Spinner/Spinner";
 import TableMenu from "../Menus/TableMenu";
+import "./tableList.scss";
 
-const TableList = () => {
+const TableListPage = () => {
   const [tables, setTables] = useState([]);
   const [showTableMenu, setShowTableMenu] = useState(false);
   const [position, setPosition] = useState({});
@@ -14,16 +14,10 @@ const TableList = () => {
 
   const onDataChange = (items) => {
     let tempTables = [];
-
     items.forEach((item) => {
       let key = item.key;
-      let data = item.val();
-      tempTables.push({
-        key: key,
-        title: data.title,
-        projects: data.projects,
-        students: data.students,
-      });
+      let { title, projects, students } = item.val();
+      tempTables.push({ key, title, projects, students });
     });
 
     setTables(tempTables);
@@ -122,4 +116,4 @@ const TableList = () => {
   );
 };
 
-export default TableList;
+export default TableListPage;

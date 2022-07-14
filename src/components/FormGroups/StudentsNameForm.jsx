@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
 import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
+import setExpiryTime from "../../utils/getExpiryTime";
+
+const generateNewStudentsArray = (studentArray, studentName, currentIndex) => {
+  return studentArray.map((student, index) => {
+    if (index === currentIndex) {
+      student = studentName;
+    }
+    return student;
+  });
+};
 
 const StudentsNameForm = ({
   students,
@@ -20,6 +30,7 @@ const StudentsNameForm = ({
   const addStudentName = (e, currentIndex) => {
     const studentName = e.target.value;
     const newStudentsNamesArray = generateNewStudentsArray(
+      students,
       studentName,
       currentIndex
     );
@@ -34,27 +45,13 @@ const StudentsNameForm = ({
     setStudents(newStudentsNamesArray);
   };
 
-  const generateNewStudentsArray = (studentName, currentIndex) => {
-    return students.map((student, index) => {
-      if (index === currentIndex) {
-        student = studentName;
-      }
-      return student;
-    });
-  };
-
-  const style = {
-    fontSize: "40px",
-    cursor: "pointer",
-  };
-
   const addNewInput = () => {
     setStudents([...students, ""]);
   };
 
   const removeInput = (currentIndex) => {
     const tmpStudentsArray = students.filter(
-      (_student, index) => index !== currentIndex
+      (_, studentId) => studentId !== currentIndex
     );
     setStudents(tmpStudentsArray);
   };
@@ -62,12 +59,12 @@ const StudentsNameForm = ({
   const saveToLocalStorage = (e, currentIndex) => {
     const studentName = e.target.value;
     const newStudentsNamesArray = generateNewStudentsArray(
+      students,
       studentName,
       currentIndex
     );
-    let tmpStorage = JSON.stringify(newStudentsNamesArray);
-    localStorage.setItem("students", tmpStorage);
-    localStorage.setItem("expiry", new Date().getTime() + 10 * 60 * 1000);
+    localStorage.setItem("students", JSON.stringify(newStudentsNamesArray));
+    setExpiryTime();
   };
   return (
     <div className="form-group-wrapper">
@@ -88,17 +85,14 @@ const StudentsNameForm = ({
             />
             {students.length > 1 && (
               <div className="minus">
-                <AiFillMinusCircle
-                  style={style}
-                  onClick={() => removeInput(index)}
-                />
+                <AiFillMinusCircle onClick={() => removeInput(index)} />
               </div>
             )}
           </div>
         );
       })}
       <div className="plus">
-        <AiFillPlusCircle style={style} onClick={addNewInput} />
+        <AiFillPlusCircle onClick={addNewInput} />
       </div>
       <div className="buttons">
         <button onClick={currentStageDecrement}>Back</button>

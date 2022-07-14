@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import "../../styles/navBar.scss";
+import "./navBar.scss";
 
-const NavBar = () => {
+const NavBarPage = () => {
   return (
     <div className="navbar">
       <nav className="navbar-menu">
@@ -16,4 +16,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default NavBarPage;

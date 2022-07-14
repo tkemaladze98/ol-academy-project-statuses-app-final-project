@@ -29,6 +29,14 @@
       .plus {
         display: flex;
         justify-content: center;
+        svg {
+          font-size: 40px;
+          cursor: pointer;
+        }
+      }
+      .minus svg {
+        font-size: 40px;
+        cursor: pointer;
       }
       .next-button {
         display: flex;

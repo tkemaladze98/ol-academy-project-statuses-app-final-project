@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "../../styles/contextMenuForTableStatuses.scss";
+import "./contextMenuForTableStatuses.scss";
 
 const statusColors = ["white", "red", "green", "yellow"];
 
@@ -17,14 +17,6 @@ const ContextMenuForTableStatuses = (props) => {
     props.updateStatus(tmpTable);
   };
 
-  const handleClick = (e) => {
-    if (menu.current !== null) {
-      if (!menu.current.contains(e.target)) {
-        props.setShowContextMenu(false);
-      }
-    }
-  };
-
   useEffect(() => {
     const filterColors = statusColors.filter(
       (item) => item !== props.changeProjectValue.color
@@ -32,6 +24,11 @@ const ContextMenuForTableStatuses = (props) => {
     setFilteredColors(filterColors);
   }, [props.changeProjectValue.color]);
   useEffect(() => {
+    const handleClick = (e) => {
+      if (!menu.current?.contains(e.target)) {
+        props.setShowContextMenu(false);
+      }
+    };
     if (menu !== null) {
       document.addEventListener("click", handleClick);
       document.addEventListener("contextmenu", handleClick);
@@ -40,7 +37,7 @@ const ContextMenuForTableStatuses = (props) => {
       document.removeEventListener("click", handleClick);
       document.removeEventListener("contextmenu", handleClick);
     };
-  });
+  }, [props]);
 
   const style = {
     top: props.top,
