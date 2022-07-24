@@ -54,7 +54,7 @@ const TableListPage = () => {
         {tables.length === 0 ? (
           <div className="spinner-paragraph">
             {isEmptyTableList ? (
-              <p className="empty-list-paragraph">Table List May be Empty</p>
+              <p className="empty-list-paragraph">Table List Is Empty</p>
             ) : (
               <Spinner />
             )}
